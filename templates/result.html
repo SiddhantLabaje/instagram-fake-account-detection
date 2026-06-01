@@ -87,7 +87,7 @@
                 </p>
 
                 <p class="text-sm text-gray-500 mt-2">
-                    Confidence: {{ (confidence * 100)|round(2) }}%
+                    Confidence: {{ confidence }}%
                 </p>
             </div>
 
@@ -104,7 +104,7 @@
                 </p>
 
                 <p class="text-sm text-gray-500 mt-2">
-                    Confidence: {{ ((1 - confidence) * 100)|round(2) }}%
+                    Confidence: {{ (100 - confidence)|round(2) }}%
                 </p>
             </div>
 
