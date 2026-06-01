@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction Result</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdf2f8, #eef2ff);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen px-4">
+
+    <div class="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full fade-in border border-gray-100">
+
+        <!-- Result Icon -->
+        <div class="flex justify-center mb-4">
+
+            {% if is_fake %}
+            <div class="bg-red-100 p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-8 w-8 text-red-500"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
+                </svg>
+            </div>
+            {% else %}
+            <div class="bg-green-100 p-3 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-8 w-8 text-green-500"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">
+            Prediction Result
+        </h1>
+
+        <!-- Result -->
+        <div class="text-center">
+
+            {% if is_fake %}
+
+            <div class="bg-red-50 border border-red-100 rounded-xl p-5">
+                <p class="text-red-600 text-lg font-semibold">
+                    {{ username }}
+                </p>
+
+                <p class="text-gray-700 mt-2">
+                    This account is likely
+                    <span class="font-bold text-red-500">FAKE</span>
+                </p>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Confidence: {{ (confidence * 100)|round(2) }}%
+                </p>
+            </div>
+
+            {% else %}
+
+            <div class="bg-green-50 border border-green-100 rounded-xl p-5">
+                <p class="text-green-600 text-lg font-semibold">
+                    {{ username }}
+                </p>
+
+                <p class="text-gray-700 mt-2">
+                    This account is likely
+                    <span class="font-bold text-green-500">REAL</span>
+                </p>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Confidence: {{ ((1 - confidence) * 100)|round(2) }}%
+                </p>
+            </div>
+
+            {% endif %}
+
+            <!-- Note -->
+            <p class="text-gray-500 text-sm mt-5">
+                {{ note }}
+            </p>
+
+        </div>
+
+        <!-- Button -->
+        <a href="/"
+           class="block text-center mt-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition duration-200">
+            Check Another Account
+        </a>
+
+    </div>
+
+</body>
+</html>
